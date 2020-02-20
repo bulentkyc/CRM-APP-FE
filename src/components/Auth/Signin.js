@@ -1,5 +1,5 @@
 import React from 'react';
-import {Link} from 'react-router-dom';
+import {Link,Redirect} from 'react-router-dom';
 
 import './css/style.css';
 import signinImg from "./images/signin-image.jpg"
@@ -9,7 +9,8 @@ import {useState} from "react";
 
 function Signin() {
 
-    /* const [state, setState] = useState({email:'',pass:''});
+    const [stateSignin, setStateSignin] = useState(false);
+    /* 
     //const [statePass, setstate] = useState('');
     let inputChangeHandler = (e) => {
         const {name , value} = e.target
@@ -26,7 +27,7 @@ function Signin() {
         e.preventDefault();
         let email = e.target.email.value;
         let pass = e.target.pass.value;
-        console.log({email,pass});
+        //console.log({email,pass});
 
         axios.post('http://localhost:5000/api/auth/login', {
             email,
@@ -36,14 +37,18 @@ function Signin() {
             console.log(response);
             if (response.data.token) {
                 localStorage.setItem('token',response.data.token);
+                setStateSignin(true);
             }else{
-                localStorage.setItem('token','')
+                localStorage.setItem('token','');
             }
         })
         .catch(function (error) {
             console.log(error);
         });
     }
+    if (stateSignin) {
+        return <Redirect to='/dashboard'/>
+    }else{
     return (
         <div className="signin-content">
                     <div className="signin-image">
@@ -84,5 +89,5 @@ function Signin() {
                 </div>
     )
 }
-
+}
 export default Signin

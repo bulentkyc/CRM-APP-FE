@@ -1,3 +1,11 @@
+.redBorder{
+  border: 1px solid red;
+}
+
+.redColor{
+  color: red;
+}
+
 /* @extend display-flex; */
 display-flex, .display-flex, .display-flex-center, .signup-content, .signin-content, .social-login, .socials {
   display: flex;
