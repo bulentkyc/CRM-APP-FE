@@ -9,7 +9,7 @@ import {useState} from "react";
 
 function Signin() {
 
-    const [state, setState] = useState({email:'',pass:''});
+    /* const [state, setState] = useState({email:'',pass:''});
     //const [statePass, setstate] = useState('');
     let inputChangeHandler = (e) => {
         const {name , value} = e.target
@@ -18,23 +18,24 @@ function Signin() {
             [name] : value
         })
     );
-
-
         //setstate([e.target.name]:e.target.value);
         console.log(state);
-    }
+    } */
     
     let registerHandler = (e) => {
-
         e.preventDefault();
+        let email = e.target.email.value;
+        let pass = e.target.pass.value;
+        console.log({email,pass});
+
         axios.post('http://localhost:5000/api/auth/login', {
-            email: state.email,
-            pass: state.pass
+            email,
+            pass
         })
         .then(function (response) {
             console.log(response);
             if (response.data.token) {
-                localStorage.setItem('token',response.data.token)
+                localStorage.setItem('token',response.data.token);
             }else{
                 localStorage.setItem('token','')
             }
@@ -54,14 +55,14 @@ function Signin() {
 
                     <div className="signin-form">
                         <h2 className="form-title">Sign in</h2>
-                        <form method="POST" onSubmit={registerHandler} className="register-form" id="login-form">
+                        <form onSubmit={registerHandler} className="register-form" id="login-form">
                             <div className="form-group">
                                 <label for="your_name"><i className="zmdi zmdi-account material-icons-name"></i></label>
-                                <input onChange={inputChangeHandler} value={state.email} type="email" name="email" id="email" placeholder="Your Name"/>
+                                <input type="email" name="email" id="email" placeholder="Your Name"/>
                             </div>
                             <div className="form-group">
                                 <label for="your_pass"><i className="zmdi zmdi-lock"></i></label>
-                                <input onChange={inputChangeHandler} value={state.pass} type="password" name="pass" id="your_pass" placeholder="Password"/>
+                                <input type="password" name="pass" id="your_pass" placeholder="Password"/>
                             </div>
                             <div className="form-group">
                                 <input type="checkbox" name="remember-me" id="remember-me" className="agree-term" />
