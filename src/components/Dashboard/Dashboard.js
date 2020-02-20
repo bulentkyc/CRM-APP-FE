@@ -1,8 +1,7 @@
 import React,{useState, useEffect} from 'react';
-import {Redirect} from 'react-router-dom';
 import axios from 'axios';
 
-function Dashboard() {
+function Dashboard(props) {
     const [state, setstate] = useState('')
 
         axios.get('http://localhost:5000/api/dashboard', 
@@ -13,11 +12,12 @@ function Dashboard() {
                 setstate(response.data.message);
             }else{
                 localStorage.removeItem('token');
-                return <Redirect to='/signin' />
+                props.history.push('/signin');
             }
         })
         .catch(function (error) {
             console.log(error);
+            props.history.push('/signin');
         });
         
 
