@@ -1,5 +1,6 @@
 import React,{useState, useEffect} from 'react';
-import axios from 'axios';
+import axios, {post} from 'axios';
+import FormData from 'form-data';
 
 function Dashboard(props) {
     const [state, setstate] = useState('')
@@ -27,22 +28,37 @@ function Dashboard(props) {
         props.history.push('/signin');
     }
 
+    
+
     const submitHandler = (e) => {
         e.preventDefault();
         console.log(e.target.file.files, e.target.name.value, e.target.email.value, e.target.phone.value, e.target.notes.value);
+        
+        /* fileUpload(e.target.file.files[0],e.target.name.value).then((response)=>{
+            console.log(response.data);
+        }); */
+        const formData = new FormData();
 
+        
+        formData.append('file',e.target.file.files[0]);
+        formData.append('name',e.target.name.value);
+        formData.append('email',e.target.email.value);
+        formData.append('phone',e.target.phone.value);
+        formData.append('notes',e.target.notes.value);
+        
         axios.post('http://localhost:5000/api/dashboard/newPerson',
-        {
-            file:e.target.file.files,
+        /* {
+            
             name:e.target.name.value, 
             email:e.target.email.value,
             phone:e.target.phone.value,
             notes:e.target.notes.value
-        },
+        } */
+        formData,
         {
             headers: {
                 'x-auth-token':localStorage.getItem('token'),
-                'Content-Type': 'multipart/form-data'
+                'content-type': 'multipart/form-data'
             }
         })
         .then(function (response) {
