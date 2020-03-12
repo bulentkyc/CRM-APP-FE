@@ -8,7 +8,7 @@ import Dashboard from './components/Dashboard/Dashboard'
 
 function App() {
   return (
-    <div className="App">
+    <div>
     <Switch>
       //Way-1 to create a route
       <Route path='/signin'>

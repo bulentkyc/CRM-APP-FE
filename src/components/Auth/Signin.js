@@ -10,6 +10,7 @@ import {useState} from "react";
 function Signin() {
 
     const [stateSignin, setStateSignin] = useState(false);
+    const [wrongCredential, setWrongCredential] = useState(false);
     /* 
     //const [statePass, setstate] = useState('');
     let inputChangeHandler = (e) => {
@@ -40,10 +41,12 @@ function Signin() {
                 setStateSignin(true);
             }else{
                 localStorage.setItem('token','');
+                setWrongCredential(true);
             }
         })
         .catch(function (error) {
             console.log(error);
+            setWrongCredential(true);
         });
     }
     if (stateSignin) {
@@ -73,6 +76,7 @@ function Signin() {
                                 <input type="checkbox" name="remember-me" id="remember-me" className="agree-term" />
                                 <label for="remember-me" className="label-agree-term"><span><span></span></span>Remember me</label>
                             </div>
+                            {wrongCredential?<small style={{color:'red'}}>e-mail or password is wrong!</small>:null}
                             <div className="form-group form-button">
                                 <input type="submit" name="signin" id="signin" className="form-submit" value="Log in"/>
                             </div>
