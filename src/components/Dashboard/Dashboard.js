@@ -32,19 +32,17 @@ function Dashboard(props) {
 
     const submitHandler = (e) => {
         e.preventDefault();
-        console.log(e.target.file.files, e.target.name.value, e.target.email.value, e.target.phone.value, e.target.notes.value);
-        
-        /* fileUpload(e.target.file.files[0],e.target.name.value).then((response)=>{
-            console.log(response.data);
-        }); */
+        console.log(e.target.file.files[0], e.target.name.value, e.target.email.value, e.target.phone.value, e.target.notes.value);
+
         const formData = new FormData();
 
         
-        formData.append('file',e.target.file.files[0]);
+        
         formData.append('name',e.target.name.value);
         formData.append('email',e.target.email.value);
         formData.append('phone',e.target.phone.value);
         formData.append('notes',e.target.notes.value);
+        formData.append('file',e.target.file.files[0]);
         
         axios.post('http://localhost:5000/api/dashboard/newPerson',
         /* {

@@ -22,7 +22,7 @@ function App() {
       
       <Route path='/dashboard' component={localStorage.getItem('token')?Dashboard:Signin}/>
 
-      <Route path='/' component={Signin}/>ß
+      <Route path='/' component={Signin}/>
     </Switch>
       
     </div>
