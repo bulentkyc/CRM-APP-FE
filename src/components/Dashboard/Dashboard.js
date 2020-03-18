@@ -1,9 +1,10 @@
 import React,{useState, useEffect} from 'react';
 import axios, {post} from 'axios';
 import FormData from 'form-data';
+import PersonCard from '../PersonCard/PersonCard';
 
 function Dashboard(props) {
-    const [state, setstate] = useState('')
+    const [state, setstate] = useState([]);
     console.log(props);
 
         /* axios.get('http://localhost:5000/api/dashboard', 
@@ -76,6 +77,16 @@ function Dashboard(props) {
 
     }
 
+    const persons = state.map((item, index)=>{
+        return <PersonCard 
+                avatar={item.avatar}
+                name={item.name}
+                email={item.email}
+                phone={item.phone}
+                notes={item.notes}
+                />
+    });
+
     return(
         <div className="d-flex">
             <div className="col-md-4 bg-info vh-100">
@@ -102,21 +113,9 @@ function Dashboard(props) {
                 <button className='btn btn-primary' onClick={logOut}>
                     Logout
                 </button>
-                {state}
+                {persons}
+                
 
-                <div className="card" style={{ width: "18rem" }}>
-
-<img className="card-img-top" alt="..." />
-<div className="card-body text-center">
-    <h5 className="card-title">Milad Mosadegh</h5>
-    <hr />
-    <p className="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-    <hr />
-    <button className="btn btn-danger m-2">Delete</button>
-    <button className="btn btn-success m-2">Edit</button>
-
-</div>
-</div>
             </div>
         </div>
     )
