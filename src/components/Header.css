@@ -1,0 +1,8 @@
+header > h1 {
+    height: 60px;
+    line-height: 60px;
+    border-left: 10px solid #00ffff;
+    background-color: rgb(96, 104, 111);
+    border-top-right-radius: 15px;
+    color: white;
+}
